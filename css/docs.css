@@ -1,0 +1,129 @@
+/*CSS */
+
+body, html{
+/*background-color: #82c2e0;*/
+background-color: #5badd6;
+	font-size:14px;
+  font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+
+/***********************
+	BARRA MENU
+***********************/
+.navbar-header img{
+  margin-top:20px;  
+}
+
+.navbar.navbar-custom{
+	background:rgba(58, 58, 58, 0.51);
+  padding:10px 0px;
+}
+
+.navbar-custom.top-nav-collapse{
+	background:#333333;
+}
+.nav.navbar-nav.nav-top{
+  margin-right:40px; 
+  float:right;
+  margin-top:20px;
+}
+
+.nav.navbar-nav.nav-top > li > a {
+	font-size:10px; 
+}
+.nav.navbar-nav.nav-top > li > a.a_panel{
+	background-color: #f2f2f2;
+  border-radius:10px;
+  color: #1e9bd8;
+  font-weight:bold;
+}
+
+
+ul.navbar-nav.nav > li > a{
+  color: #fff;
+  text-transform: uppercase;
+	font-size:12px;
+  font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  letter-spacing: 1px;
+}
+
+ul.navbar-nav.nav > li > a:hover{
+  color: rgba(255, 255, 255, 0.8);
+  background-color: transparent;
+}
+
+ul.navbar-nav.nav > li > a:focus,
+ul.navbar-nav.nav > li > a:visited{
+  color: rgba(255, 255, 255, 0.8);
+  background-color: transparent;
+}
+
+.navbar-toggle{
+  color:white;
+  margin-top:20px;
+}
+
+/*NAV LATERAL DOCS*/
+
+.nav.nav-pills.nav-stacked.nav-docs li a{
+  color: #39c;
+  background-color: #f2f2f2;
+  text-align:center;
+  font-size:16px;
+  font-weight:bold;
+  margin-bottom:20px; 
+  cursor:pointer;
+}
+.nav.nav-pills.nav-stacked.nav-docs li ul.nav-sub{
+  display:none;
+}
+.nav.nav-pills.nav-stacked.nav-docs li.has_submenu:hover > ul.nav-sub{
+  display:block;
+}
+
+/* LENZO */ 
+.lenzo{
+  box-sizing:border-box;
+  padding:20px 80px;
+  border-radius:4px;
+  text-align:justify;
+  background-color: #f2f2f2;
+}
+img{
+  margin-bottom:20px;
+}
+
+.alert{ 
+  border-radius:10px;
+  text-align:center;
+}
+
+  .alert-warning{
+    background-color: #f5d6b9;
+  }
+
+/**************
+   TIPOGRAFIA 
+***************/
+h1.welcome{
+  text-align:center;
+  color:#39c;
+  margin-bottom:40px;
+}
+
+h2, h3{
+  color:#39c;
+  margin-top:40px;
+  margin-bottom:30px;
+  text-align:left;
+}
+
+h4{
+  margin-bottom:20px;
+  
+}
+
+p{
+  margin-bottom:20px;
+}

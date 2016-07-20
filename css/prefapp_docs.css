@@ -5,6 +5,9 @@ body, html{
 background-color: #5badd6;
 	font-size:14px;
   font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+	overflow-x: hidden;
+	color: black !important;
+	padding-top:0 !important;
 }
 
 
@@ -12,7 +15,7 @@ background-color: #5badd6;
 	BARRA MENU
 ***********************/
 .navbar-header img{
-  margin-top:20px;  
+  margin-top:20px;
 }
 
 .navbar.navbar-custom{
@@ -24,19 +27,17 @@ background-color: #5badd6;
 	background:#333333;
 }
 .nav.navbar-nav.nav-top{
-  margin-right:40px; 
+  margin-right:40px;
   float:right;
   margin-top:20px;
 }
 
 .nav.navbar-nav.nav-top > li > a {
-	font-size:10px; 
+	font-size:10px;
 }
-.nav.navbar-nav.nav-top > li > a.a_panel{
-	background-color: #f2f2f2;
-  border-radius:10px;
-  color: #1e9bd8;
-  font-weight:bold;
+.nav.navbar-nav.nav-top > li > a:after,
+ .nav.navbar-nav.nav-top > li > a > i.fa-envelope-o{
+	display:none !important;
 }
 
 
@@ -64,7 +65,9 @@ ul.navbar-nav.nav > li > a:visited{
   margin-top:20px;
 }
 
+
 /*NAV LATERAL DOCS*/
+
 
 .nav.nav-pills.nav-stacked.nav-docs li a{
   color: #39c;
@@ -72,17 +75,18 @@ ul.navbar-nav.nav > li > a:visited{
   text-align:center;
   font-size:16px;
   font-weight:bold;
-  margin-bottom:20px; 
+  margin-bottom:20px;
   cursor:pointer;
+	padding: 10px 15px;
+
 }
-.nav.nav-pills.nav-stacked.nav-docs li ul.nav-sub{
-  display:none;
-}
-.nav.nav-pills.nav-stacked.nav-docs li.has_submenu:hover > ul.nav-sub{
-  display:block;
+.nav.nav-pills.nav-stacked.nav-docs li a,
+.nav.nav-pills.nav-stacked.nav-docs li.active > ul > li > a{
+	border-radius:4px;
 }
 
-/* LENZO */ 
+
+/* LENZO */
 .lenzo{
   box-sizing:border-box;
   padding:20px 80px;
@@ -94,7 +98,7 @@ img{
   margin-bottom:20px;
 }
 
-.alert{ 
+.alert{
   border-radius:10px;
   text-align:center;
 }
@@ -104,7 +108,7 @@ img{
   }
 
 /**************
-   TIPOGRAFIA 
+   TIPOGRAFIA
 ***************/
 h1.welcome{
   text-align:center;
@@ -121,7 +125,7 @@ h2, h3{
 
 h4{
   margin-bottom:20px;
-  
+
 }
 
 p{

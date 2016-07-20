@@ -1,0 +1,24 @@
+# Sidebar para PrefApp
+
+entries:
+- title: sidebar
+  output: web
+  folders:
+  - title: Inicio
+    output: web
+    folderitems:
+      - title: Tour inicial
+        url: /index.html
+        output: web
+  - title: Servidores
+    output: web
+    folderitems:
+    - title: Vincular Azure
+      url: /vincular_azure.html
+      output: web
+    - title: Vincular Linode
+      url: /vincular_linode.html
+      output: web
+    - title: Vincular Digital Ocean
+      url: /vincular_digitalocean.html
+      output: web

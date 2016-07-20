@@ -2,16 +2,16 @@
 output: web
 # this property is useful for conditional filtering of content that is separate from the PDF.
 
-topnav_title: Jekyll Documentation Theme
+topnav_title: PrefApp Docs
 # this appears on the top navigation bar next to the home button
 
-site_title: Jekyll theme for documentation
+site_title: PrefApp Docs
 # this appears in the html browser tab for the site title (seen mostly by search engines, not users)
 
-company_name: Your company
+company_name: PrefApp
 # this appears in the footer
 
-github_editme_path: tomjohnson1492/documentation-theme-jekyll/blob/gh-pages/pages/
+#github_editme_path: tomjohnson1492/documentation-theme-jekyll/blob/gh-pages/pages/
 # if you're using Github, provide the basepath to the branch you've created for reviews, following the sample here. if not, leave this value blank.
 
 disqus_shortname: idrbwjekyll
@@ -28,7 +28,7 @@ exclude:
   - .gitignore
 # these are the files and directories that jekyll will exclude from the build
 
-feedback_email: tomjohnson1492@gmail.com
+# feedback_email: tomjohnson1492@gmail.com
 # used as a contact email for the Feedback link in the top navigation bar
 
 # feedback_disable: true
@@ -37,7 +37,7 @@ feedback_email: tomjohnson1492@gmail.com
 # feedback_text: "Need help?"
 # if you uncomment the previous line, it changes the Feedback text
 
-# feedback_link: "http://helpy.io/"
+# feedback_link: "http://feedback.prefapp.in/"
 # if you uncomment the previous line, it changes where the feedback link points to
 
 highlighter: rouge
@@ -52,8 +52,8 @@ kramdown:
 # filter used to process markdown. note that kramdown differs from github-flavored markdown in some subtle ways
 
 collections:
-  tooltips:
-    output: false
+ tooltips:
+   output: false
 # collections are declared here. this renders the content in _tooltips and processes it, but doesn't output it as actual files in the output unless you change output to true
 
 defaults:
@@ -65,7 +65,7 @@ defaults:
       layout: "page"
       comments: true
       search: true
-      sidebar: home_sidebar
+      sidebar: prefapp_sidebar
   -
     scope:
       path: ""
@@ -84,18 +84,20 @@ defaults:
       layout: "post"
       comments: true
       search: true
-      sidebar: home_sidebar
+      sidebar: prefapp_sidebar
 
-# these are defaults used for the frontmatter for these file types
+  # these are defaults used for the frontmatter for these file types
 
 sidebars:
-- home_sidebar
-- mydoc_sidebar
-- product1_sidebar
-- product2_sidebar
-- other
+- prefapp_sidebar
+#- home_sidebar
+#- mydoc_sidebar
+#- product1_sidebar
+#- product2_sidebar
+#- other
 
-description: "Intended as a documentation theme based on Jekyll for technical writers documenting software and other technical products, this theme has all the elements you would need to handle multiple products with both multi-level sidebar navigation, tags, and other documentation features."
+description: Librería de documentación de Prefapp.es
+# description: "Intended as a documentation theme based on Jekyll for technical writers documenting software and other technical products, this theme has all the elements you would need to handle multiple products with both multi-level sidebar navigation, tags, and other documentation features."
 # the description is used in the feed.xml file
 
 # needed for sitemap.xml file only

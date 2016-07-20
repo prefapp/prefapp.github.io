@@ -1,9 +1,30 @@
+
 <footer>
             <div class="row">
                 <div class="col-lg-12 footer">
-               &copy;{{ site.time | date: "%Y"  }} {{site.company_name}}. All rights reserved. <br />
-{% if page.last_updated %}<p>Page last updated:</span> {{page.last_updated}}<br/>{% endif %} Site last generated: {{ site.time | date: "%b %-d, %Y"  }} <br />
-<p><img src="{{ "images/company_logo.png" }}" alt="Company logo"/></p>
+               &copy;{{ site.time | date: "%Y"  }} {{site.company_name}} <br/> Todos los derechos reservados <br />
+<!--{% if page.last_updated %}<p>Page last updated:</span> {{page.last_updated}}<br/>{% endif %} Site last generated: {{ site.time | date: "%b %-d, %Y"  }} <br />
+<p>
+-->
+                <p class="p_footer"><img class="logo_footer" src="{{ "images/company_logo.png" }}" alt="Company logo"/></p>
+                <p class="p_footer">
+                  <ul class="list-inline banner-social-buttons">
+                    <li>
+                        <a href="{{https://github.com/prefapp}}" class="btn btn-default btn-sm" target="_blank">
+                          <i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
+                    </li>
+                    <li>
+                        <a href="{{https://facebook.com/prefapp}}" class="btn btn-default btn-sm" target="_blank"><i class="fa fa-facebook fa-fw"></i> <span class="network-name">Facebook</span></a>
+                    </li>
+                    <li>
+                    </li><li>
+                        <a href="{{https://twitter.com/prefapp}}" class="btn btn-default btn-sm" target="_blank"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></a>
+                    </li>
+                    <li>
+                        <a href="{{https://plus.google.com/+PrefappInES}}" rel="publisher" class="btn btn-default btn-sm" target="_blank"><i class="fa fa-google-plus fa-fw"></i> <span class="network-name">Google+</span></a>
+                    </li>
+                </ul>
+                </p>
                 </div>
             </div>
 </footer>

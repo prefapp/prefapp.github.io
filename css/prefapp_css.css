@@ -1,0 +1,78 @@
+/* CSS específico para a documentación de Prefapp*/
+
+.container-fluid{
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+h4{
+  color: black !important;
+}
+
+
+/****** TOP NAV ********/
+.navbar-inverse{
+  background-color: #5badd6 !important;
+  border-color: #5badd6 !important;
+
+}
+
+/*eliminamos o icono de external link*/
+.container.topnavlinks .nav.navbar-nav.navbar-right li a::after{
+  display:none;
+}
+
+/*** SIDEBAR NAV *****/
+/*eliminamos o sidebar title*/
+.sidebarTitle{
+  display:none !important;
+
+}
+
+
+.nav.navbar-nav.navbar-right li:nth-child(4) > a{
+  background-color: #f2f2f2;
+  border-radius:10px;
+  color: #1e9bd8;
+  font-weight:bold;
+}
+
+
+
+/*** FOndo prefapp *****/
+.container-fluid.fondo_prefapp{
+  background-color: #5badd6;
+}
+.lenzo_prefapp{
+  background-color: #f2f2f2;
+  border-radius:4px;
+  padding:20px 80px;
+  margin-bottom:30px;
+}
+
+
+/*** tamaño logo Footer *****/
+.p_footer{
+  text-align:center;
+}
+.logo_footer{
+  width: 100px;
+  margin-bottom: 0px !important;
+
+}
+/* redes sociales */
+.list-inline.banner-social-buttons{
+  text-align: center;
+}
+.list-inline.banner-social-buttons li a{
+  border: 2px solid #26afef;
+  color: white;
+  background-color: #5badd6;
+}
+.list-inline.banner-social-buttons li a:hover{
+  border: 2px solid #26afef;
+  color: #26afef;
+  background-color: rgba(38, 175, 239, 0.25);
+}

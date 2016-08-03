@@ -8,9 +8,29 @@ background-color: #5badd6;
 	overflow-x: hidden;
 	color: black !important;
 	padding-top:0 !important;
+	text-align:justify;
+
 }
 
+p{
+	line-height:1.6;
 
+}
+
+/*SEARCH
+
+Escondemos o primeiro resultado da búsqueda, que non tiña link*/
+
+ul#results-container li:first-child{
+	visibility:hidden;
+}
+
+/*poñemolo á mesma altura*/
+
+#search-input{
+	margin-top:0px;
+
+}
 /***********************
 	BARRA MENU
 ***********************/
@@ -40,6 +60,10 @@ background-color: #5badd6;
 	display:none !important;
 }
 
+.nav > li.active > a {
+	background-color: transparent;
+
+}
 
 ul.navbar-nav.nav > li > a{
   color: #fff;
@@ -115,6 +139,9 @@ h1.welcome{
   color:#39c;
   margin-bottom:40px;
 }
+.post-title-main{
+	display:none;
+}
 
 h2, h3{
   color:#39c;
@@ -125,6 +152,7 @@ h2, h3{
 
 h4{
   margin-bottom:20px;
+	line-height: 1.6;
 
 }
 

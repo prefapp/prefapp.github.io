@@ -733,7 +733,8 @@ ol.series li {
 }
 
 #mysidebar .nav ul {
-    background-color: #FAFAFA;
+    /*background-color: #FAFAFA;*/
+    
 }
 .nav ul.series li {
     list-style: decimal;

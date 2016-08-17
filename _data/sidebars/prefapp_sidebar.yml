@@ -16,9 +16,9 @@ entries:
     - title: Vincular Azure
       url: /vincular_azure.html
       output: web
-    - title: Vincular Linode
-      url: /vincular_linode.html
-      output: web
-    - title: Vincular Digital Ocean
-      url: /vincular_digitalocean.html
-      output: web
+    # - title: Vincular Linode
+    #   url: /vincular_linode.html
+    #   output: web
+    # - title: Vincular Digital Ocean
+    #   url: /vincular_digitalocean.html
+    #   output: web

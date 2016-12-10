@@ -2,16 +2,23 @@
 title: Instalación de Docker y docker-compose en MS Server 2016
 keywords: instalación, docker, docker-compose, server 2016, windows
 tags:
-    - instalación
-    - docker
-    - windows
-    - docker-compose
+  - instalación
+  - docker
+  - windows
+  - docker-compose
 layout: page
 toc: false
 permalink: windows_server_2016_docker
 ---
 
-## Instalación de Docker
+## Instalación de Docker y docker-compose en Windows Server 2016
+
+En este manual se procede a la instalación de:
+
+- [Docker](http://localhost:4000/windows_server_2016_docker#instalacin-de-docker)
+- [docker-compose](http://localhost:4000/windows_server_2016_docker#instalacin-de-docker-compose)
+
+### Instalación de Docker
 
 Se emplea el módulo [OneGet provider PowerShell Module](https://github.com/oneget/oneget) para realizar la instalación. 
 
@@ -35,7 +42,7 @@ Tenemos que reiniciar el sistema para poder utilizar el software instalado:
 Restart-Computer -Force
 ```
 
-### Actualizar el sistema 
+#### Actualizar el sistema 
 
 Para asegurarnos que el sistema está actualizado una vez instalado el software de Docker, ejecutamos:
 
@@ -43,7 +50,6 @@ Para asegurarnos que el sistema está actualizado una vez instalado el software 
 sconfig
 ```
 Ahora, elegimos:
-
 1. Opción 6) 'Download and Install Updates' *y*
 1. Opción A) 'dowload All updates'
 
@@ -52,15 +58,14 @@ Ahora, elegimos:
 
 [Windows Containers on Windows Server](https://msdn.microsoft.com/virtualization/windowscontainers/quick_start/quick_start_windows_server)
 
-## Instalación de docker-compose
+### Instalación de docker-compose
 
 Para instalar *docker-compose* utilizamos [Chocolatey](https://chocolatey.org/) que es un proyecto open source para manejar paquetería en Windows.
 
 Instalamos chocolatey (Desde Cmd.exe):
 
 ```powershell
-@powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
-    
+iwr https://chocolatey.org/install.ps1 -UseBasicParsing | iex
 ```
 
 Si experimentáis algún problema con la instalación, id a esta [página](https://chocolatey.org/install)

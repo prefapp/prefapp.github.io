@@ -870,6 +870,12 @@ span.soft {
     .navbar-inverse .navbar-nav .open .dropdown-menu > li > a {
         color: #444;
     }
+  }
+
+  @media (max-width:300px){
+    img.logo_prefapp{
+      width:70%;
+    }
 }
 
 @media (max-width: 990px) {
@@ -881,9 +887,10 @@ span.soft {
 @media (min-width: 1000px) {
 
     ul#mysidebar {
-        width: 225px;
+        width:98%;
     }
 }
+
 
 @media (max-width: 900px) {
 

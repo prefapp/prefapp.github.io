@@ -2,13 +2,13 @@
 output: web
 # this property is useful for conditional filtering of content that is separate from the PDF.
 
-topnav_title: PrefApp Docs
+topnav_title: PREFAPP Docs
 # this appears on the top navigation bar next to the home button
 
-site_title: PrefApp Docs
+site_title: PREFAPP Docs
 # this appears in the html browser tab for the site title (seen mostly by search engines, not users)
 
-company_name: PrefApp
+company_name: PREFAPP
 # this appears in the footer
 
 #github_editme_path: tomjohnson1492/documentation-theme-jekyll/blob/gh-pages/pages/
@@ -96,7 +96,7 @@ sidebars:
 #- product2_sidebar
 #- other
 
-description: Librería de documentación de Prefapp.es
+description: Librería de documentación de prefapp.es
 # description: "Intended as a documentation theme based on Jekyll for technical writers documenting software and other technical products, this theme has all the elements you would need to handle multiple products with both multi-level sidebar navigation, tags, and other documentation features."
 # the description is used in the feed.xml file
 

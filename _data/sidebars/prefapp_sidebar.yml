@@ -22,3 +22,9 @@ entries:
     # - title: Vincular Digital Ocean
     #   url: /vincular_digitalocean.html
     #   output: web
+  - title: Stacks
+    output: web
+    folderitems:
+      - title: Stack IIS y SQL Server
+        url: /iis_sql_server_stack
+        output: web

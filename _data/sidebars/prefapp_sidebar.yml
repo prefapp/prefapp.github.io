@@ -28,3 +28,6 @@ entries:
       - title: Stack IIS y SQL Server
         url: /iis_sql_server_stack
         output: web
+      - title: Stack PHP y MySQL
+        url: /php_stack
+        output: web

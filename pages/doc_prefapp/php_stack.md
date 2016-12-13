@@ -46,7 +46,7 @@ Para la stack php disponemos actualmente de 3 combinaciones de construcciones t�
 4. Una vez que tenemos configurada nuestra aplicación le damos a **Preparar Aplicación** y el sistema construirá las imágenes asociadas a las construcciones de la aplicación,
  y las almacenará en el registry privado.
     <aside class="notice"> 
-    El proceso de compilación de la imagen puede llevar varios minutos
+    _OJO: El proceso de compilación de la imagen puede llevar varios minutos_
     </aside>
 
 5. El sistema construye y almacena las imágenes necesarias para la aplicación, y una vez finalizado el proceso ya la podemos ver en la lista de aplicaciones:   
@@ -55,7 +55,7 @@ Para la stack php disponemos actualmente de 3 combinaciones de construcciones t�
 6. y podemos descargarnos el [docker-compose.yml](https://docs.docker.com/compose/compose-file/) con el que desplegarla:   
 ![descargar_compose](/images/php_descargar_compose.png "Descargar el compose de la aplicación")   
 
-    Con él podemos lanzar localmente la aplicación que hemos preparado mediante el siguiente comando (ejecutado en el directorio donde hemos guardado el fichero)
+    Con él podemos lanzar localmente la aplicación que hemos preparado mediante el siguiente comando (ejecutado en el directorio donde hemos guardado el fichero)    
 ```bash
 docker-compose up
 ```

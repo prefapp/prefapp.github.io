@@ -44,8 +44,8 @@ Para la stack php disponemos actualmente de 3 combinaciones de construcciones t�
 - **app:php_ini_admin_values**: hash de opciones de configuración de php necesarios para la aplicación
 
 4. Una vez que tenemos configurada nuestra aplicación le damos a **Preparar Aplicación** y el sistema construirá las imágenes asociadas a las construcciones de la aplicación,
- y las almacenará en el registry privado.
-OJO: **El proceso de compilación de la imagen puede llevar varios minutos**
+ y las almacenará en el registry privado.   
+ **El proceso de compilación de la imagen puede llevar varios minutos**
 
 5. El sistema construye y almacena las imágenes necesarias para la aplicación, y una vez finalizado el proceso ya la podemos ver en la lista de aplicaciones:   
 ![administrar_aplicacion](/images/php_administrar_aplicacion.png "Administrando la aplicación")

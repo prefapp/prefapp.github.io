@@ -19,23 +19,17 @@ Dentro de la sección **Stacks** escogemos la stack de PHP/MySQL
 
 En la pantalla resultante, vamos a configurar nuestra aplicación:
 
-1) Para que podamos construir las imágenes necesarias para tu aplicación, primero es necesario que elegir las construcciones que necesita y configurarlas.
+1. Para que podamos construir las imágenes necesarias para tu aplicación, primero es necesario que elegir las construcciones que necesita y configurarlas.
 Para la stack php disponemos actualmente de 3 combinaciones de construcciones típicas (planos):
-
 - php
 - php y mysql
 - php, redis y mysql
 
-
-2) Introducimos un alias que nos resulte cómodo para identificarla y, si lo deseamos, una descripción.   
+2. Introducimos un alias que nos resulte cómodo para identificarla y, si lo deseamos, una descripción.   
 ![alias_descripción](/images/alias_descripcion.png "Introducimos el alias y la descripción")
 
-
-3) En la construcción **php** tenemos los siguientes parámetros configurables:   
-![parametros_php](/images/parametros_php_stack.png)
-
-[//]: # (**domain**: dominio sobre el que se va a servir la aplicacion (por defecto: _default_, para cualquier dominio)
-[//]: # (**target_path**: directorio donde se desplegara la aplicacion (por defecto: /home/app)
+3. En la construcción **php** tenemos los siguientes parámetros configurables:   
+![parametros_php](/images/parametros_php_stack.png)    
 - **app:repo_url**: url del repositorio donde descargar el código de la aplicación
 - **app:repo_type**: tipos de repositorios válidos: **git, svn, remote_file** (por_defecto: git)
 - **app:revision**: rama, tag o commit a desplegar (por defecto: master)
@@ -49,23 +43,21 @@ Para la stack php disponemos actualmente de 3 combinaciones de construcciones t�
 - **app:php_version**: version de php a usar por la aplicacion (valores válidos: 5.5, 5.6, 7.0, 7.1)
 - **app:php_ini_admin_values**: hash de opciones de configuración de php necesarios para la aplicación
 
+4. Una vez que tenemos configurada nuestra aplicación le damos a **Preparar Aplicación** y el sistema construirá las imágenes asociadas a las construcciones de la aplicación,
+ y las almacenará en el registry privado.
+    <aside class="notice"> 
+    El proceso de compilación de la imagen puede llevar varios minutos
+    </aside>
 
-3) Una vez que tenemos configurada nuestra aplicación le damos a **Preparar Aplicación**
-
-
-4) El sistema construye y almacena las imágenes necesarias para la aplicación, y una vez finalizado el proceso ya la podemos ver en la lista de aplicaciones:   
+5. El sistema construye y almacena las imágenes necesarias para la aplicación, y una vez finalizado el proceso ya la podemos ver en la lista de aplicaciones:   
 ![administrar_aplicacion](/images/php_administrar_aplicacion.png "Administrando la aplicación")
 
+6. y podemos descargarnos el [docker-compose.yml](https://docs.docker.com/compose/compose-file/) con el que desplegarla:   
+![descargar_compose](/images/php_descargar_compose.png "Descargar el compose de la aplicación")   
 
-5) y podemos descargarnos el docker-compose.yml con el que desplegarla:   
-![descargar_compose](/images/php_descargar_compose.png "Descargar el compose de la aplicación")
-
-Tenemos ahora un [docker-compose.yml](https://docs.docker.com/compose/compose-file/) que colocamos en cualquier punto de nuestro sistema de ficheros de la máquina Windows.
-
-
-6) Con él podemos lanzar localmente la aplicación que hemos preparado mediante el siguiente comando (ejecutado en el directorio donde hemos guardado el fichero)
-
+    Con él podemos lanzar localmente la aplicación que hemos preparado mediante el siguiente comando (ejecutado en el directorio donde hemos guardado el fichero)
 ```bash
 docker-compose up
 ```
-7) O también, podemos desplegarla en un servidor previamente registrado en el panel.
+
+7. O también, podemos desplegarla en un servidor previamente registrado en el panel.

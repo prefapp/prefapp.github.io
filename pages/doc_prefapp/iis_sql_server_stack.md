@@ -83,6 +83,8 @@ La password de administrador tiene que cumplir una serie de __requisitos__
 
 ![administrar_aplicacion](/images/iis_administrar_aplicacion.png "Administrando la aplicación")
 
+Clickamos en ella para administrarla. 
+
 6) Nos descargamos el docker-compose.yml para poder desplegarlo:
 
 ![administrar_aplicacion](/images/iis_descargar_compose.png "Descargar el compose de la aplicación")
@@ -92,7 +94,7 @@ Tenemos ahora un [docker-compose.yml](https://docs.docker.com/compose/compose-fi
 7) Lanzamos la aplicación que hemos preparado mediante el siguiente comando (ejecutado en el directorio donde hemos guardado el fichero)
 
 ```powershell
-docker-compose up
+docker-compose -f .\docker-compose.yml up 
 ```
 
 

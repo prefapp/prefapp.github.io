@@ -56,7 +56,7 @@ Para la stack php disponemos actualmente de 3 combinaciones de construcciones t�
 ![descargar_compose](/images/php_descargar_compose.png "Descargar el compose de la aplicación")   
 
     Con él podemos lanzar localmente la aplicación que hemos preparado mediante el siguiente comando (ejecutado en el directorio donde hemos guardado el fichero)    
-```bash
+```
 docker-compose up
 ```
 

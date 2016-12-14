@@ -72,7 +72,7 @@ La password de administrador tiene que cumplir una serie de __requisitos__
 - Incluir al menos un caracter de a-z
 - Incluir al menos un caracter de A-Z
 - Incluir al menos un caracter de 0-9
-- Incluir al menos un caracter no alfanumérico (,%.)
+- Incluir al menos un caracter no alfanumérico *que no sea & y $*
 
 
 4) Una vez que tenemos configurada nuestra aplicación le damos a 'Preparar Aplicación'

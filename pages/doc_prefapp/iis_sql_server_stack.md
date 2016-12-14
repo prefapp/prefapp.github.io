@@ -30,13 +30,13 @@ Necesitamos tener instalado *Docker* y *docker-compose* en nuestra máquina:
 
 Nos vamos al panel y nos logueamos
 
-![loguear en panel](/images/iis_login_panel.png)
+![loguear en panel](/images/login_panel.png)
 
 En el panel nos vamos *aplicaciones* y *nueva aplicacion*
 
 En el panel de selección de aplicación, escogemos *stacks* 
 
-![selección_stack](/images/iis_seleccion_stack.png)
+![selección_stack](/images/seleccion_stack.png)
 
 Escogemos ahora la stack de Aspnet y Sql Server
 
@@ -47,7 +47,7 @@ En la pantalla resultante, vamos a configurar nuestra aplicación:
 
 1) Introducimos un alias que nos resulte cómodo para identificarla y, si lo deseamos, una descripción. 
 
-![alias_descripción](/images/iis_alias_descripcion.png "Introducimos el alias y la descripción")
+![alias_descripción](/images/alias_descripcion.png "Introducimos el alias y la descripción")
 
 2) En nuestro container de IIS podemos establecer el puerto donde se va a conectar nuestra aplicación (el puerto de la máquina de Windows), por defecto está el 80. 
 
@@ -77,7 +77,7 @@ La password de administrador tiene que cumplir una serie de __requisitos__
 
 4) Una vez que tenemos configurada nuestra aplicación le damos a 'Preparar Aplicación'
 
-![preparar_aplicacion](/images/iis_preparar_aplicacion.png "Preparando la aplicación")
+![preparar_aplicacion](/images/preparar_aplicacion.png "Preparando la aplicación")
 
 5) Nuestra aplicación se prepara, y ya la podemos ver en la lista de aplicaciones:
 

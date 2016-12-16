@@ -38,9 +38,15 @@ Este tutorial ilustra algunas de las funcionalidades básicas de puzzle, para el
 Vamos a crear una serie de directorios para nuestro proyecto
 
 ```bash
-mkdir ~/puzzle_tutorial; 
-mkdir ~/puzzle_tutorial/composes; 
-mkdir ~/puzzle_tutorial/box_dev;
+
+puzzle generate project puzzle_tutorial
+
+# salida
+mkdir : ~/puzzle_tutorial
+mkdir : ~/puzzle_tutorial/run
+mkdir : ~/puzzle_tutorial/base_compose 
+mkdir : ~/puzzle_tutorial/dev_box
+mkdir : ~/puzzle_tutorial/dev_prod
  
 ```
 
@@ -51,13 +57,22 @@ Para poder orquestar containers, uno de los métodos básicos es el docker-compo
 En nuestra aplicación, vamos a emplear el siguiente:
 
 ```yaml
-
 # docker compose
+
+db:
+    image: mysql
+    volumes_from:
+        - db_data       
+
+db_data:
+    image: busybox
+    volumes:
+        - ${RUTA_DATOS}:/var/lib/mysql
 
 app:
     image: php
     ports:
-        "80:80"
+        - "80:80"
     volumes:
         - ${RUTA_CODIGO}:/var/www/app
     volumes_from:
@@ -69,16 +84,6 @@ app_data:
     image: busybox
     volumes:
         - /var/www/data
-     
-db:
-    image: mysql
-    volumes_from:
-        - db_data       
-
-db_data:
-    image: busybox
-    volumes:
-        - ${RUTA_DATOS}:/var/lib/mysql
 ```
 
 Este compose básico se controla desde dos variables de entorno donde podremos establecer la ruta (del HOST) donde está nuestro código y otra donde ruta (también del HOST) donde almacenar/leer los datos de la bbdd. 
@@ -207,28 +212,52 @@ tasks: {}
 Nos colocamos en la carpeta raíz del proyecto:
 
 ```bash
-cd ~/puzzle_tutorial; puzzle up --save ./run --only-build 
+cd ~/puzzle_tutorial; puzzle up 
 ```
 
-Este comando va a crear un docker compose **específico** a partir del compose de base reescrito con nuestras preferencias. 
+En este momento, han pasado muchas cosas:
+
+1. Puzzle ha creado, en la carpeta run, una carpeta app (el nombre de la pieza)
+1. En esa carpeta ha introducido un docker-compose generado a partir del compose de base (~/puzzle_tutorial/compose/docker-compose.yml) y las configuraciones de la pieza. 
+1. A almacenado toda la información en una bbdd (~/puzzle_tutorial/run/puzzle.db)
+1. Ha lanzado el proyecto.
 
 Si hacemos
 
 ```bash
-ls ~/puzzle_tutorial/run
+puzzle ps
 ```
 
-Veremos que se ha creado un directorio app con el docker-compose necesario para lanzar nuestra aplicación. 
+Veremos la información que nos da de todos los containers y su estado. 
 
-Además tenemos un puzzle.db que es una bbdd con lo necesario para REPLICAR este proyecto allí donde queramos.
+Además, el puzzle.db que es una bbdd con lo necesario para REPLICAR este proyecto allí donde queramos.
 
-#### Lanzamiento de la aplicación
+Si hacemos un cat del compose generado (~/puzzle_tutorial/run/app/docker-compose.yml) y nos fijamos en la sección environment:
 
-Para poner la aplicación en marcha, basta con ejecutar:
+```yaml
 
-```bash
-puzzle up
+# seccion environment de app
+
+app: 
+  environment: 
+    MYSQL_DATABASE: mi_bbdd
+    MYSQL_PASSWORD: app_password
+    MYSQL_USER: app
+
+# seccion environment de db
+
+db: 
+  environment: 
+    MYSQL_DATABASE: mi_bbdd
+    MYSQL_PASSWORD: app_password
+    MYSQL_ROOT_PASSWORD: mi_password_secreta
+    MYSQL_USER: app
+
 ```
+
+Vemos que los valores se han colocado correctamente en ambos containers de acuerdo a la distribución establecida en la pieza. En un solo punto de definición tenemos control de las variables de entorno de varios containers.
+
+
 
 
 

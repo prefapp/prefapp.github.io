@@ -7,7 +7,7 @@ tags:
     - stack
 layout: page
 toc: false
-permalink: puzzle_tut
+permalink: puzzle_tut_main
 ---
 
 # Sobre puzzle
@@ -100,7 +100,7 @@ Puzzle establece el concepto de **pieza** como una colección de datos (meta-dat
 Ejecutamos el siguiente comando:
 
 ```bash
-puzzle generate piece ~/puzzle_tutorial/box_dev/app.yml
+puzzle generate piece > ~/puzzle_tutorial/box_dev/app.yml
 ```
 Lo que nos generará un fichero con el siguiente contenido:
 
@@ -209,6 +209,11 @@ tasks: {}
 
 ### Arranque del proyecto
 
+Antes de arrancar el proyecto, tenemos que establecer los valores de las dos variables de entorno (en el HOST)
+
+- **RUTA_DATOS**: donde colocar los datos de la bbdd
+- **RUTA_CODIGO**: el código de nuestra aplicación. 
+
 Nos colocamos en la carpeta raíz del proyecto:
 
 ```bash
@@ -258,11 +263,186 @@ db:
 Vemos que los valores se han colocado correctamente en ambos containers de acuerdo a la distribución establecida en la pieza. En un solo punto de definición tenemos control de las variables de entorno de varios containers.
 
 
+### Introducción a las tasks
+
+Ahora tenemos dos containers relacionados entre sí (uno de bbdd y uno de aplicación), pero no tenemos código en nuestra aplicación. 
+
+Como recordaremos, puzzle nos permite crear tareas que se ejecutan en nuestros containers para ayudar al desarrollo.
+
+Vamos a crear un script en nuestra carpeta de código:
+
+```php
+
+<?php
+
+echo("Hola \n");
+echo("La base de datos se llama " . $_ENV["MYSQL_DATABASE"] . "\n");
+echo("El usuario se llama " . $_ENV["MYSQL_USER"] . "\n");
+
+```
+
+Lo guardamos en la carpeta de código en nuestro HOST (a donde hayamos apuntado $RUTA_CODIGO).
+
+Nos interesa ejecutarlo para probar si funciona, **pero en el contexto de nuestra aplicación**. 
+
+Para ello, vamos a revisitar la pieza de dev_box e introducir una task:
+
+```yaml
+
+# ~/puzzle_tutorial/dev_box/app.yml
+
+tasks:
+    run_app:
+        app:
+            - php /var/www/app/dopple.php
+
+```
+
+Lo que acabamos de hacer es crear una **task**, que se ejecutará en el container app.
+
+Al haber cambiado nuestra pieza, necesitamos recompilar nuestro proyecto:
+
+```bash
+puzzle up --rebuild
+```
+
+Ahora podemos lanzar la tarea
+
+```bash
+puzzle task app run_app
+```
+
+que nos dará el siguiente output:
+
+```bash
+# output
+
+Running run_php for app
+Hola mundo
+La bbdd se llama 'mi_bbdd'
+El usuario de acceso es 'app'
+```
+
+De esta forma, podemos desarrollar nuestra aplicación con un entorno creado para ella con todos los containers necesarios. 
 
 
+#### Comandos administrativos en la bbdd
+
+Para administrar la bbdd, lo ideal es crear un container auxiliar que realice conexiones contra nuestro container de bbdd y nos permita realizar tareas tales como:
+
+* Importar una bbdd desde un fichero .sql
+* Exportar una bbdd (backup)
+* Reparar índices o tablas de bbdd
 
 
+Este container auxiliar, puede estar basado en la misma imagen que la propia bbdd. 
 
+Para crearlo, vamos a modificar nuestro docker-compose original:
+
+```yaml
+
+# ~/puzzle_tutorial/compose/docker-compose.
+
+db_aux:
+  image: mysql
+  volumes:
+    - ${RUTA_DB_AUX}:/home/aux
+  links:
+    - "db:db"
+
+```
+
+Le hemos agregado un container auxiliar que se encarga de trabajar contra la bbdd.
+
+Ahora, podemos crear una tarea de importación de bbdd en nuestra pieza:
+
+```yaml
+
+# ~/puzzle_tutorial/dev_box/app.yml
+
+tasks:
+    migrar_bbdd:
+        aux:
+            - sh -c 'mysql --user=$MYSQL_USER --password=$MYSQL_PASSWORD --host=db $MYSQL_DATABASE < /var/lib/mysql/dopple.sql'
+
+```
+
+Pero, ¡cuidado! este container también necesita acceso a las credenciales de mysql. Para dárselo, basta con modificar la sección override:
+
+```yaml
+
+
+overrides:
+
+        # ...
+
+        "db + app + db_aux":
+    
+        # ...
+```
+
+Lo único que hemos hecho, es agregar ("+ db_aux") a la definición de variables de entorno, de tal manera que los containers de tipo db_aux también tengan acceso a las credenciales de mysql.
+
+Definimos la ruta del volumen compartido con aux:
+
+```bash
+export RUTA_DB_AUX=~/db_aux
+```
+
+Y reconstruimos nuestro puzzle
+
+```bash
+cd ~/puzzle_tutorial; puzzle up --rebuild
+```
+
+Colocamos este [fichero](http://falta_fichero) en nuestra volumen compartido con db_aux y ejecutamos:
+
+```bash
+puzzle task app migrar_bbdd
+```
+Et voilà! Se ha creado un container de tipo db_aux (imagen mysql) que ha ejecutado una importación de la bbdd a nuestro container de mysql. 
+
+
+#### Tarea de backup de bbdd
+
+Si queremos crear una tarea de backup de bbdd, no nos será muy dificil con la estructura actual:
+
+
+```yaml
+
+# ~/puzzle_tutorial/dev_box/app.yml
+
+tasks:
+
+    # ...
+
+    backup_bbdd:
+        db_aux:
+            - sh -c 'ahora=$(date +"%d_%m_%y"); mysqldump --user=$MYSQL_USER --password=$MYSQL_PASSWORD --host=db $MYSQL_DATABASE > "/home/aux/backup_$ahora.sql"'
+
+```
+
+Agregamos la nueva tarea a nuestra compilación:
+
+```bash
+puzzle up --rebuild
+```
+
+Para realizar un backup, bastaría con realizar:
+
+```bash
+puzzle task app backup_bbdd
+```
+
+Y tendríamos un backup en nuestro volumen compartido (el valor de $RUTA_DB_AUX)
+
+Ni que decir tiene, que esto se puede meter en un cron:
+
+```bash
+05 00 * * * cd ~/puzzle_tutorial; puzzle task app backup_bbdd
+```
+
+Y tendríamos un backup de nuestra bbdd cada día a las 00:05
 
 
 

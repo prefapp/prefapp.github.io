@@ -81,7 +81,3 @@ choco install -y docker-compose
 - [Información sobre docker-compose](https://docs.docker.com/compose/)
 
 
-
-
-
-

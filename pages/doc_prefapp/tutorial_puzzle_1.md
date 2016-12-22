@@ -252,8 +252,9 @@ Con esta estructura, ya podemos lanzar nuestro servicio.
 ## 5. Gestión básica de nuestro servicio
 
 Para arrancar nuestro servicio con puzzle, debemos definir las variables de entorno:
-* RUTA_CODIGO
-* RUTA_DATOS
+
+* **RUTA_CODIGO**
+* **RUTA_DATOS**
 
 Ahora, basta con teclear el siguiente comando:
 

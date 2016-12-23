@@ -35,3 +35,5 @@ entries:
     output: web
     folderitems:
       - title: Puzzle
+        url: /tutorial_puzzle_1
+        output: web

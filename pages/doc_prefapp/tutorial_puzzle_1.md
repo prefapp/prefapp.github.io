@@ -36,7 +36,7 @@ Para ello, vamos a desplegar un único servicio que consta:
 
 ## 1. Preparativos previos
 
-### Cocinando una imagen de PHP
+### A) Cocinando una imagen de PHP
 
 Vamos a partir, para nuestra aplicación, de una imagen oficial de PHP que encontramos en [dockerhub](https://hub.docker.com/_/php/).
 
@@ -57,7 +57,10 @@ docker tag php mi_app_php
 Arrancamos un container con esa imagen y empleamos el útil comando que nos ofrece la gente de PHP para instalar la extensión mysqli:
 
 ```bash
-docker run --name mi_app_php -ti mi_app_php docker-php-ext-install mysqli 
+docker run --name mi_app_php -ti mi_app_php bash
+docker-php-ext-install mysqli 
+exit
+
 ```
 El container está ahora apagado, pero ya tiene instalada la extensión que necesitamos. Nos basta ahora con volcar ese cambio a la imagen que estamos cocinando:
 
@@ -75,6 +78,18 @@ docker rm -v mi_app_php
 
 Tenemos, por fin, una imagen preparada con las extensiones que tenemos para realizar el resto de este tutorial.
 
+### B) Instalando el código de prueba
+
+Vamos a trabajar con un pequeño programa en PHP que realiza conexiones a una bbdd. 
+
+En una localización arbitraria de nuestro sistema de ficheros clonamos el proyecto:
+
+```bash
+git clone https://github.com/prefapp/prefapp-doppleman
+```
+
+En este proyecto encontramos dos carpetas, una con código en PHP y otra con un pequeño script sql que crea una sencilla Bbdd. 
+
 ## 2. Iniciando el proyecto 
 
 Puzzle trabaja mediante **proyectos**. Un proyecto agrupa la información, estructurada en ficheros, necesaria para crear, mantener y actualizar el despliegue de uno o varios servicios. 
@@ -82,14 +97,14 @@ Puzzle trabaja mediante **proyectos**. Un proyecto agrupa la información, estru
 Si tecleamos:
 
 ```bash
-puzzle generate project puzzle_tutorial
+puzzle generate project puzzle_tutorial 
 
 # salida
-mkdir : ~/puzzle_tutorial
-mkdir : ~/puzzle_tutorial/run
-mkdir : ~/puzzle_tutorial/compose 
-mkdir : ~/puzzle_tutorial/dev_box
-mkdir : ~/puzzle_tutorial/prod_box
+mkdir : ./puzzle_tutorial
+mkdir : ./puzzle_tutorial/run
+mkdir : ./puzzle_tutorial/compose 
+mkdir : ./puzzle_tutorial/dev_box
+mkdir : ./puzzle_tutorial/prod_box
 ``` 
 
 Vemos como puzzle nos ha creado la siguiente estructura:
@@ -119,16 +134,17 @@ db_data:
 app:
     image: mi_app_php
     ports:
-        - "80:80"
+        - "80"
     volumes:
         - ${RUTA_CODIGO}:/var/www/app
     links:
         - "db:db"
+    command: php -S 0.0.0.0:80 -t /var/www/app/php-dopple/web
 ```
 
 Se articulan, como vemos, dos containers, y un tercero (un container data) para guardar los datos de mysql de forma externa y asegurar su persistencia. 
 
-Este fichero lo almacenaremos en ~/puzzle_tutorial/compose/mi_app.yml
+Este fichero lo almacenaremos en ./puzzle_tutorial/compose/mi_app.yml
 
 ## 4. Controlando el servicio, nuestra primera pieza
 
@@ -140,7 +156,7 @@ La pieza va a ser un fichero (expresado en yaml) que guardaremos en una box (en 
 Ejecutamos el siguiente comando:
 
 ```bash
-puzzle generate piece > ~/puzzle_tutorial/dev_box/mi_app.yml
+puzzle generate piece > ./puzzle_tutorial/dev_box/mi_app.yml
 ```
 Lo que nos generará un fichero con el siguiente contenido:
 
@@ -253,16 +269,16 @@ Con esta estructura, ya podemos lanzar nuestro servicio.
 
 Para arrancar nuestro servicio con puzzle, debemos definir las variables de entorno:
 
-* **RUTA_CODIGO**
-* **RUTA_DATOS**
+* **RUTA_CODIGO**: la apuntaremos a la localización donde hemos clonado el proyecto prefapp-doppleman
+* **RUTA_DATOS**: podemos colocarlo donde queramos (por ejemplo en /tmp)
 
 Ahora, basta con teclear el siguiente comando:
 
 ```bash
-cd ~/puzzle_tutorial; puzzle up
+cd ./puzzle_tutorial; puzzle up
 ```
 
-En poco tiempo, veremos como el sistema genera un docker-compose específico, que situará en la carpeta ~/puzzle_tutorial/run y lo ejecutará: se bajarán las imágenes necesarias, se arrancará el container de base de datos y, por último, nuestro container de aplicación. 
+En poco tiempo, veremos como el sistema genera un docker-compose específico, que situará en la carpeta ./puzzle_tutorial/run y lo ejecutará: se bajarán las imágenes necesarias, se arrancará el container de base de datos y, por último, nuestro container de aplicación. 
 
 Si queremos comprobar que todo está bien, basta con teclear:
 
@@ -282,7 +298,31 @@ Si ahora lanzamos:
 ```bash
 puzzle ps
 ```
-Veremos que todos nuestros containers se han detenido. 
+Veremos que todos nuestros containers se han detenido.
+
+La volvemos a levantar:
+
+```bash
+puzzle up
+```
+
+
+### A) Ejecutando un run sobre el container de aplicación
+
+La aplicación necesita aún algo para funcionar. ¡La bbdd está vacía! Afortunadamente, tenemos un pequeño importador en nuestra aplicación de ejemplo. 
+
+Por supuesto, este script tendrá que ejecutarse en un container y, los cánones de la containerización indican que no debemos emplear el container ya existente (en la medida de lo posible hay que evitar el docker exec). 
+
+Puzzle permite la ejecución de run basándose en la plantilla de un container existente en un servicio. 
+
+```bash
+puzzle run mi_app app 'sh -c "php /var/www/app/php-dopple/bin/importador_bbdd.php /var/www/app/mysql-dopple/dopple.sql"'
+```
+
+Este comando importa el script sql situado en la ruta y lo carga en Mysql.
+
+Basta con poner ahora en nuestro navegador: http://localhost:4000/dopple.php y veremos la aplicación funcionado. 
+
 
 En la [siguiente parte](/tutorial_puzzle_2) de esta serie de tutoriales, veremos cómo crear comandos avanzados de administración de nuestro sistema. 
 

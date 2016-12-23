@@ -31,3 +31,7 @@ entries:
       - title: Stack PHP y MySQL
         url: /php_stack
         output: web
+  - title: Tools
+    output: web
+    folderitems:
+      - title: Puzzle
